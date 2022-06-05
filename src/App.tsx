@@ -1,26 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import RatingCard from "./components/RatingCard";
+import RatingCardResult from "./components/RatingCardResult";
 
-function App() {
+const App = () => {
+  const ratingOptions: number = 5;
+  const [rating, setRating] = useState<number>(0);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <RatingCard ratingOptions={ratingOptions} setRating={setRating} />
+          }
+        />
+        <Route
+          path="/rating-result"
+          element={
+            <RatingCardResult ratingOptions={ratingOptions} rating={rating} />
+          }
+        />
+      </Routes>
+    </BrowserRouter>
   );
-}
+};
 
 export default App;
